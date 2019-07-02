@@ -1,0 +1,47 @@
+<h1>Cashflow Calculator</h1>
+
+<p *ngIf="!cashflows"><em>Please enter your loan</em></p>
+
+<div *ngFor="let cashflow of cashflows,index as i">
+  <h4>Loan {{i+1}}</h4>
+  <table class='table table-striped' *ngIf="cashflows">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Interest</th>
+        <th>Principal</th>
+        <th>Rem Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let detail of cashflow.monthPays | slice:1">
+        <td>{{ detail.month }}</td>
+        <td>{{ detail.interest.toFixed(2) }}</td>
+        <td>{{ detail.principal.toFixed(2) }}</td>
+        <td>{{ detail.remBalance.toFixed(2) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button (click)="getPool()" class="btn btn-info">Get Pool</button>
+
+<h4>Pool Level</h4>
+<table class='table table-striped' *ngIf="pool">
+  <thead>
+    <tr>
+      <th>Month</th>
+      <th>Interest</th>
+      <th>Principal</th>
+      <th>Rem Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cashflow of pool.monthPays | slice:1">
+      <td>{{ cashflow.month }}</td>
+      <td>{{ cashflow.interest.toFixed(2) }}</td>
+      <td>{{ cashflow.principal.toFixed(2) }}</td>
+      <td>{{ cashflow.remBalance.toFixed(2) }}</td>
+    </tr>
+  </tbody>
+</table>
